@@ -3,7 +3,7 @@
 define autofs::mapfile (
   $path
 ) {
-  include autofs::params
+  include ::autofs::params
 
   if !defined(Concat[$path]) {
     concat { $path:

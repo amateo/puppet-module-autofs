@@ -8,8 +8,8 @@ define autofs::mount (
   $mapfile    = undef,
   $order      = undef,
 ) {
-  include autofs
-  include autofs::params
+  include ::autofs
+  include ::autofs::params
 
   if $mapfile != undef {
     validate_absolute_path($mapfile)
@@ -19,7 +19,7 @@ define autofs::mount (
   }
 
   autofs::mapfile { "autofs::mount ${title}":
-    path => $path
+    path => $path,
   }
 
   concat::fragment { "autofs::mount ${path}:${mountpoint}":
