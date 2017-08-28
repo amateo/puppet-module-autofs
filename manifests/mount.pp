@@ -22,11 +22,12 @@ define autofs::mount (
     path => $path,
   }
 
-  concat::fragment { "autofs::mount ${path}:${mountpoint}":
-    ensure  => $ensure,
-    target  => $path,
-    content => "${mountpoint} ${map} ${options}\n",
-    order   => '100',
+  if $ensure == present {
+    concat::fragment { "autofs::mount ${path}:${mountpoint}":
+      target  => $path,
+      content => "${mountpoint} ${map} ${options}\n",
+      order   => '100',
+    }
   }
 
 }
